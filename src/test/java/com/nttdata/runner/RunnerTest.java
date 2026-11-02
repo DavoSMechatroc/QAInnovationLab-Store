@@ -11,7 +11,10 @@ import org.junit.runner.RunWith;
         stepNotifications = true,
         features = "src/test/resources/features",
         glue = "com.nttdata",
-        tags = "@test"
+        tags = "@teststore"
+        //tags = "@categoriaInvalida"
+        //tags = "@loginValido"
+        //tags = "@loginInvalido"
 )
 public class RunnerTest {
 }

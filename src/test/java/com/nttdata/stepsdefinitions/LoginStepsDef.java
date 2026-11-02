@@ -8,6 +8,8 @@ import io.cucumber.java.es.Entonces;
 import io.cucumber.java.es.Y;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
+import com.nttdata.page.LoginPage;
+import com.nttdata.steps.AccionesWeb;
 
 import java.time.Duration;
 
@@ -21,30 +23,43 @@ public class LoginStepsDef {
         return new InventorySteps(driver);
     }
 
-    @Dado("que me encuentro en la página de login de Saucedemo")
-    public void que_me_encuentro_en_la_página_de_login_de_sacedemo() {
+
+    @Dado("estoy en la página de la tienda")
+    public void estoyEnLaPaginaDeLaTienda() {
         driver = getDriver();
-        driver.get("https://www.saucedemo.com/");
+        driver.get("https://qalab.bensg.com/store");
         screenShot();
     }
-    @Cuando("inicio sesión con las credenciales usuario: {string} y contraseña: {string}")
-    public void inicio_sesión_con_las_credenciales_usuario_y_contraseña(String user, String password) {
+
+    @Y("me logueo con mi usuario {string} y clave {string}")
+    public void meLogueoConMiUsuarioYClave(String correo, String clave) {
         LoginSteps loginSteps = new LoginSteps(driver);
-        loginSteps.ingresoUsuarioYClave(user,password);
+        loginSteps.iniciarSesionTienda(correo, clave);
         screenShot();
     }
-    @Entonces("valido que debería aparecer el título de {string}")
-    public void valido_que_debería_aparecer_el_título_de(String expectedTitle) {
-        String title =  inventorySteps(driver).getTitle();
-        //prueba: validamos el título del producto
-        Assertions.assertEquals(expectedTitle, title);
-    }
-    @Y("también valido que al menos exista un item")
-    public void también_valido_que_al_menos_exista_un_item() {
-        int itemsListSize = inventorySteps(driver).getItemSize();
-        //prueba: validar que al menos exista un item
-        Assertions.assertTrue(itemsListSize > 0, "El tamaño de la lista es: " + itemsListSize);
-        esperaImplicita();
+
+    @Entonces("valido que el usuario inició sesión correctamente")
+    public void validoQueElUsuarioInicioSesionCorrectamente() {
+        AccionesWeb acciones = new AccionesWeb(driver);
+
+        String nombreUsuario = acciones.obtenerTexto(LoginPage.usuarioAutenticado);
+
+        Assertions.assertFalse(nombreUsuario.trim().isEmpty(),
+                "No se encontró el nombre del usuario autenticado");
+
         screenShot();
     }
+
+    @Entonces("valido que aparezca el error de autenticación")
+    public void validoQueAparezcaElErrorDeAutenticacion() {
+        LoginSteps loginSteps = new LoginSteps(driver);
+
+        String mensajeError = loginSteps.obtenerMensajeErrorLogin();
+
+        Assertions.assertEquals("Error de autenticación.", mensajeError.trim());
+
+        screenShot();
+    }
+
+
 }

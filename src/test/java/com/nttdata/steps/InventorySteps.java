@@ -33,4 +33,16 @@ public class InventorySteps {
         List<WebElement> items = this.driver.findElements(InventoryPage.itemsCards);
         return items.size();
     }
+
+    public void bajarPagina() {
+        AccionesWeb acciones = new AccionesWeb(driver);
+        acciones.hacerScroll(500);
+    }
+
+    public void subirPagina() {
+        AccionesWeb acciones = new AccionesWeb(driver);
+        acciones.hacerScroll(-500);
+    }
+
+
 }

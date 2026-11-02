@@ -26,36 +26,46 @@ public class LoginSteps {
      * Escribir el usuario
      * @param user el usuario
      */
-    public void typeUser(String user){
-        WebElement userInputElement = driver.findElement(LoginPage.userInput);
-        userInputElement.sendKeys(user);
-        //Espera implicita
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(444));
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
-        //Espera explicita
-        wait.until(ExpectedConditions.visibilityOfElementLocated(LoginPage.loginButton));
+    public void typeUser(String user) {
+        AccionesWeb acciones = new AccionesWeb(driver);
+        acciones.escribirTexto(LoginPage.userInput, user);
     }
-
     /**
      * Escribir el password
      * @param password el password del usuario
      */
-    public void typePassword(String password){
-        this.driver.findElement(LoginPage.passInput).sendKeys(password);
+    public void typePassword(String password) {
+        AccionesWeb acciones = new AccionesWeb(driver);
+        acciones.escribirTexto(LoginPage.passInput, password);
     }
-
     /**
      * Hacer click en el botón login
      */
-    public void login(){
-        this.driver.findElement(LoginPage.loginButton).click();
+    public void login() {
+        AccionesWeb acciones = new AccionesWeb(driver);
+        acciones.hacerClick(LoginPage.loginButton);
     }
-
-
     public void ingresoUsuarioYClave(String user, String password) {
         typeUser(user);
         typePassword(password);
         esperaImplicita();
         login();
     }
+
+    //INICIO DE SESION
+    public void iniciarSesionTienda(String correo, String clave) {
+        AccionesWeb acciones = new AccionesWeb(driver);
+        acciones.hacerClick(LoginPage.enlaceIniciarSesion);
+        acciones.escribirTexto(LoginPage.emailTienda, correo);
+        acciones.escribirTexto(LoginPage.passwordTienda, clave);
+        acciones.hacerClick(LoginPage.botonIngresarTienda);
+    }
+
+    //MENSAJE DE ERROR LOGIN
+    public String obtenerMensajeErrorLogin() {
+        AccionesWeb acciones = new AccionesWeb(driver);
+
+        return acciones.obtenerTexto(LoginPage.mensajeErrorLogin);
+    }
+
 }

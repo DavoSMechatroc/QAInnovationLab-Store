@@ -55,3 +55,8 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+*.iml
+.env
+
+drivers/LICENSE.chromedriver
+drivers/THIRD_PARTY_NOTICES.chromedriver

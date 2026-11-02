@@ -6,7 +6,7 @@ Característica: Product - Store
   @loginValido
   Escenario: Inicio de sesión con credenciales válidas
     Dado estoy en la página de la tienda
-    Y me logueo con mi usuario "sandav1302@gmail.com" y clave "Davos20267#$"
+    Y me logueo con mi usuario "USUARIO" y clave "PASSWORD"
     Entonces valido que el usuario inició sesión correctamente
     Cuando navego a la categoria "Clothes" y subcategoria "Men"
     Y selecciono el primer producto

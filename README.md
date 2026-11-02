@@ -1,2 +1,4 @@
 # QAInnovationLab
-Automation Team / For education purpose
+Automatizacion de Web
+
+-cambiar USUARIO Y CONTRASEÑA en store.feature

@@ -19,6 +19,7 @@ public class AccionesWeb {
     }
 
     public void hacerClick(By elemento) {
+
         wait.until(ExpectedConditions.elementToBeClickable(elemento)).click();
     }
 

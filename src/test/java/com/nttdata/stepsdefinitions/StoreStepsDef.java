@@ -34,12 +34,12 @@ public class StoreStepsDef {
         screenShot();
     }
 
-    @Y("agrego {int} unidades del primer producto al carrito")
+    @Cuando("agrego {int} unidades del primer producto al carrito")
     public void agregoUnidadesDelPrimerProducto(int cantidad) {
-
         driver = getDriver();
-
         StoreSteps storeSteps = new StoreSteps(driver);
+
+        storeSteps.seleccionarPrimerProducto();
         storeSteps.agregarProductoAlCarrito(cantidad);
 
         screenShot();
